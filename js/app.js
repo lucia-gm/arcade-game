@@ -1,10 +1,12 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed, sprite) {
+var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.width = cellWidth;
+    this.height = cellHeight;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -17,6 +19,9 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
+    if(this.x > 800) {
+      this.x = -100;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -30,7 +35,14 @@ Enemy.prototype.render = function() {
 var Player = function(x, y, sprite) {
     this.x = 202; // To start on 3rd column, (cellWidth * 2)
     this.y = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
+    this.width = cellWidth;
+    this.height = cellHeight;
     this.sprite = 'images/char-horn-girl.png';
+};
+
+Player.prototype.reset = function(dt) {
+    this.x = 202;
+    this.y = 404;
 };
 
 // Update the player's position, required method for game
@@ -73,7 +85,7 @@ Player.prototype.handleInput = function(keyCode) {
 // This will be used to update the player's position
 let cellWidth = 101;
 let cellHeight = 83;
-let enemyPositionY = [63, 146, 229] // The enemies can only go through rock cells.
+let enemyPositionY = [72, 155, 238] // The enemies can only go through rock cells.
 
 // To return a random integer between the specified values
 function getRandomInt(min, max) {
