@@ -1,3 +1,7 @@
+const winModal = document.querySelector('#winModal');
+const close = document.querySelector('.close');
+const play = document.querySelector('.play-button');
+
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
@@ -45,10 +49,10 @@ Player.prototype.reset = function(dt) {
     this.y = 404;
 };
 
-// Update the player's position, required method for game
-// Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
-
+    if(this.y < 0) {
+      winModal.classList.remove('hidden');
+    }
 };
 
 //Draw the player on the screen
@@ -108,8 +112,7 @@ for (let i = 0; i < 6; i++) {
 // Place the player object in a variable called player
 var player = new Player();
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to Player.handleInput() method
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
@@ -120,3 +123,24 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// When the user clicks on <span> (x), close the modal
+close.addEventListener('click', resetGame);
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener('click', function(event) {
+    if (event.target == winModal) {
+        resetGame();
+    }
+});
+
+// When the user click on play again, restart the game
+play.addEventListener('click', resetGame);
+
+
+// To hide the modal
+function resetGame() {
+    winModal.classList.add('hidden');
+    player.x = 202;
+    player.y = 404;
+}
