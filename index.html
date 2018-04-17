@@ -3,16 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <section class="score-panel">
+        <ul class="lives">
+            <li><i class="fa fa-heart"></i></li>
+            <li><i class="fa fa-heart"></i></li>
+            <li><i class="fa fa-heart"></i></li>
+        </ul>
+
+        <div class="restart">
+            <i class="fa fa-repeat"></i>
+        </div>
+    </section>
       <!-- The Win Modal -->
     <div id="winModal" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2 class="modal-title">Congratulations!</h2>
-                <span class="modal-span">You made it!</span>
+                <h2 class="modal-title"></h2>
             </div>
             <div class="modal-footer">
                 <button class="play-button">Play again</button>

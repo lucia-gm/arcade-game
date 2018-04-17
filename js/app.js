@@ -1,6 +1,9 @@
 const winModal = document.querySelector('#winModal');
+const modalText = document.querySelector('.modal-title');
 const close = document.querySelector('.close');
 const play = document.querySelector('.play-button');
+const lives = document.querySelectorAll('.fa-heart');
+
 
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
@@ -39,19 +42,34 @@ Enemy.prototype.render = function() {
 var Player = function(x, y, sprite) {
     this.x = 202; // To start on 3rd column, (cellWidth * 2)
     this.y = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
+    this.numberOflives = 3;
     this.width = cellWidth;
     this.height = cellHeight;
     this.sprite = 'images/char-horn-girl.png';
 };
 
-Player.prototype.reset = function(dt) {
+Player.prototype.resetPosition = function(dt) {
     this.x = 202;
     this.y = 404;
 };
 
 Player.prototype.update = function(dt) {
     if(this.y < 0) {
-      winModal.classList.remove('hidden');
+        winModal.classList.remove('hidden');
+        modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
+    } else if (player.numberOflives < 3) {
+        lives[2].classList.remove('fa-heart');
+        lives[2].classList.add('fa-heart-o');
+        if (player.numberOflives < 2) {
+            lives[1].classList.remove('fa-heart');
+            lives[1].classList.add('fa-heart-o');
+            if (player.numberOflives < 1) {
+                lives[0].classList.remove('fa-heart');
+                lives[0].classList.add('fa-heart-o');
+                winModal.classList.remove('hidden');
+                modalText.innerHTML = `Game Over  :(<span class="modal-span">Sorry, you don't have more lives</span>`;
+            }
+        }
     }
 };
 
@@ -137,10 +155,13 @@ window.addEventListener('click', function(event) {
 // When the user click on play again, restart the game
 play.addEventListener('click', resetGame);
 
-
 // To hide the modal
 function resetGame() {
     winModal.classList.add('hidden');
-    player.x = 202;
-    player.y = 404;
+    player.resetPosition();
+    player.numberOflives = 3;
+    lives.forEach(function(life) {
+        life.classList.remove('fa-heart-o');
+        life.classList.add('fa-heart');
+    });
 }
