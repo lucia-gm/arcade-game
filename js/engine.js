@@ -96,7 +96,9 @@ var Engine = (function(global) {
         player.update();
     }
 
-
+    /* This is called by the update function and check if the enemies collide
+     * with the player.
+     */
     function checkCollisions() {
         for (const enemy of allEnemies) {
             if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
