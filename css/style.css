@@ -1,6 +1,7 @@
 body {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
+    background: url('../images/gaming-pattern.png'); /* Background pattern from Subtle Patterns */
 }
 
 /*
