@@ -3,6 +3,7 @@ const modalText = document.querySelector('.modal-title');
 const close = document.querySelector('.close');
 const play = document.querySelector('.play-button');
 const lives = document.querySelectorAll('.fa-heart');
+const restart = document.querySelector('.fa-repeat');
 
 
 // Enemies our player must avoid
@@ -141,6 +142,9 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// if restart is clicked, reset the game
+restart.addEventListener('click', resetGame);
 
 // When the user clicks on <span> (x), close the modal
 close.addEventListener('click', resetGame);
