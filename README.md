@@ -1,6 +1,39 @@
-frontend-nanodegree-arcade-game
-===============================
+# Arcade game
+Arcade game based on Frogger Game. This is part of the Udacity Front-End Nanodegree.
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+[View online demo](https://lucia-gm.github.io/arcade-game/)
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## How to play
+Reach the water without colliding into any one of the enemies (Bugs).
+
+You can move left, right, up and down. The enemies move in varying speeds on the paved block portion of the scene. You have three opportunities, once the player collides with an enemy, you lose a life and the game is reset. Once you reach the water the game is won.
+
+You can play [here](https://lucia-gm.github.io/arcade-game/).
+
+
+## Credits
+- The background image is from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/).
+- The sounds are from [RCP Tones](https://rcptones.com/dev_tones/#tab-id-1).
+
+## License
+MIT License
+
+Copyright (c) 2018 Lucia Gonzalez Moscoso
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
