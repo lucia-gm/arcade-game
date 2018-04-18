@@ -15,8 +15,10 @@ let playerSprite = document.querySelector('input[name=player-name]:checked').val
 // Logical variables
 // Based on the measures of the board's cells per the engine.js files
 // This will be used to update the player's position
-let cellWidth = 101;
-let cellHeight = 83;
+const cellWidth = 101;
+const cellHeight = 83;
+const playerInitialX = 202; // To start on 3rd column, (cellWidth * 2)
+const playerInitialY = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
 let enemyPositionY = [72, 155, 238] // The enemies can only go through rock cells.
 
 
@@ -84,8 +86,8 @@ class Enemy {
 
 class Player {
     constructor(sprite) {
-        this.x = 202; // To start on 3rd column, (cellWidth * 2)
-        this.y = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
+        this.x = playerInitialX;
+        this.y = playerInitialY;
         this.numberOflives = 3;
         this.width = cellWidth;
         this.height = cellHeight;
@@ -93,8 +95,8 @@ class Player {
     }
 
     resetPosition() {
-        this.x = 202;
-        this.y = 404;
+        this.x = playerInitialX;
+        this.y = playerInitialY;
     }
 
     // Check if the player wins or loses
@@ -142,7 +144,7 @@ class Player {
                 }
                 break;
             case 'down':
-                if(this.y < 404) {// The player cannot move off screen from the bottom when he's on the last row
+                if(this.y < playerInitialY) {// The player cannot move off screen from the bottom when he's on the last row
                     this.y += cellHeight;
                 }
                 break;
