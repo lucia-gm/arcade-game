@@ -4,11 +4,13 @@
 
 // DOM selectors
 const winModal = document.querySelector('#winModal');
-const modalText = document.querySelector('.modal-title');
+const modalText = document.querySelector('.modal-message');
 const close = document.querySelector('.close');
-const play = document.querySelector('.play-button');
+const play = document.querySelectorAll('.play-button');
 const lives = document.querySelectorAll('.fa-heart');
 const restart = document.querySelector('.fa-repeat');
+const startModal = document.querySelector('#startModal');
+let playerSprite = document.querySelector('input[name=player-name]:checked').value;
 
 // Logical variables
 // Based on the measures of the board's cells per the engine.js files
@@ -20,7 +22,7 @@ let enemyPositionY = [72, 155, 238] // The enemies can only go through rock cell
 
 
 /*
- * Variables
+ * Functions
  */
 
 // Return a random integer between the specified values
@@ -81,13 +83,13 @@ class Enemy {
 
 
 class Player {
-    constructor(x, y, sprite) {
+    constructor(sprite) {
         this.x = 202; // To start on 3rd column, (cellWidth * 2)
         this.y = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
         this.numberOflives = 3;
         this.width = cellWidth;
         this.height = cellHeight;
-        this.sprite = 'images/char-horn-girl.png';
+        this.sprite = 'images/' + sprite;
     }
 
     resetPosition() {
@@ -95,7 +97,7 @@ class Player {
         this.y = 404;
     }
 
-    // Check if the enemy wins or loses
+    // Check if the player wins or loses
     update() {
         if(this.y < 0) {
             winModal.classList.remove('hidden');
@@ -154,7 +156,7 @@ class Player {
  * Instantiate the objects
  */
 
-const player = new Player();
+const player = new Player(playerSprite);
 
 const allEnemies = [];
 
@@ -168,6 +170,14 @@ for (let i = 0; i < 6; i++) {
 /*
  * Event listeners
  */
+
+ startModal.addEventListener('submit', function(e) {
+  playerSprite = document.querySelector('input[name=player-name]:checked').value;
+  startModal.classList.add('hidden');
+  player.sprite = 'images/' + playerSprite;
+
+   e.preventDefault();
+ }, false);
 
 // This listens for key presses and sends the keys to Player.handleInput() method
 document.addEventListener('keyup', function(e) {
@@ -195,4 +205,4 @@ window.addEventListener('click', function(event) {
 });
 
 // This listens if the user clicks on play again and restart the game
-play.addEventListener('click', resetGame);
+play[1].addEventListener('click', resetGame);

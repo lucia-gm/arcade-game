@@ -4,6 +4,31 @@ body {
     background: url('../images/gaming-pattern.png'); /* Background pattern from Subtle Patterns */
 }
 
+
+h2 {
+    font-size: 2em;
+    margin: 0;
+    padding-top: 1em;
+}
+
+label {
+    display: block;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.block {
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+}
+
+
+
 /*
  * Styles for the Score Panel
  */
@@ -69,12 +94,6 @@ body {
     color: #02ccba;
 }
 
-.modal-title {
-    font-size: 2em;
-    margin: 0;
-    padding-top: 1em;
-}
-
 .modal-span {
     display: block;
     padding: 1em 0 2em 0;
@@ -105,6 +124,8 @@ body {
     border: 0;
 }
 
+label:hover,
+input[type=radio]:hover,
 .play-button:hover {
     cursor: pointer;
 }

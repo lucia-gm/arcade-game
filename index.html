@@ -18,12 +18,50 @@
             <i class="fa fa-repeat"></i>
         </div>
     </section>
+
+      <!-- The Start Modal -->
+    <div id="startModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Choose your player</h2>
+            <form>
+                <div class="option">
+                    <label for="player1"><img src="images/char-boy.png" class="player-img" alt="Char boy"></label>
+                    <input type="radio" name="player-name" value="char-boy.png" id="player1" checked>
+                </div>
+
+                <div class="option">
+                    <label for="player2"><img src="images/char-horn-girl.png" class="player-img" alt="Char horn girl"></label>
+                    <input type="radio" name="player-name" value="char-horn-girl.png" id="player2">
+                </div>
+
+                <div class="option">
+                    <label for="player3"><img src="images/char-cat-girl.png" class="player-img" alt="Char cat girl"></label>
+                    <input type="radio" name="player-name" value="char-cat-girl.png" id="player3">
+                </div>
+
+                <div class="option">
+                    <label for="player4"><img src="images/char-pink-girl.png" class="player-img" alt="Char pink girl"></label>
+                    <input type="radio" name="player-name" value="char-pink-girl.png" id="player4">
+                </div>
+
+                <div class="option">
+                    <label for="player5"><img src="images/char-princess-girl.png" class="player-img" alt="Char princess girl"></label>
+                    <input type="radio" name="player-name" value="char-princess-girl.png" id="player5">
+                </div>
+
+                <div class= "block">
+                    <button type="submit" class="play-button">Play</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
       <!-- The Win Modal -->
     <div id="winModal" class="modal hidden">
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close">&times;</span>
-                <h2 class="modal-title"></h2>
+                <h2 class="modal-message"></h2>
             </div>
             <div class="modal-footer">
                 <button class="play-button">Play again</button>
