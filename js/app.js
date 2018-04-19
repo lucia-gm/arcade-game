@@ -2,6 +2,15 @@
  * Variables
  */
 
+// Resources
+const audioMove = new Audio('sounds/move.wav');
+const audioMoveUp = new Audio('sounds/moveup.wav');
+const audioMoveDown = new Audio('sounds/movedown.wav');
+const audioDie = new Audio('sounds/die.mp3');
+const audioWin = new Audio('sounds/win.mp3');
+const audioLose = new Audio('sounds/lose.mp3');
+const audioReset = new Audio('sounds/reset.wav');
+
 // DOM selectors
 const winModal = document.querySelector('#winModal');
 const modalText = document.querySelector('.modal-message');
@@ -41,6 +50,7 @@ function getRandomIndex(array) {
 
 // Hide the modal and reset the player
 function resetGame() {
+    audioReset.play();
     winModal.classList.add('hidden');
     player.resetPosition();
     player.numberOflives = 3;
@@ -104,6 +114,7 @@ class Player {
         if(this.y < 0) {
             winModal.classList.remove('hidden');
             modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
+            audioWin.play();
         } else if (player.numberOflives < 3) {
             lives[2].classList.remove('fa-heart');
             lives[2].classList.add('fa-heart-o');
@@ -115,6 +126,7 @@ class Player {
                     lives[0].classList.add('fa-heart-o');
                     winModal.classList.remove('hidden');
                     modalText.innerHTML = `Game Over  :(<span class="modal-span">Sorry, you don't have more lives</span>`;
+                    audioLose.play();
                 }
             }
         }
@@ -131,21 +143,25 @@ class Player {
             case 'left':
                 if(this.x > 0) { // The player cannot move off screen when he's on the 1st column
                     this.x -= cellWidth;
+                    audioMove.play();
                 }
                 break;
             case 'up':
                 if(this.y > 0) { // The player cannot move off screen when he's on the 1st row
                     this.y -= cellHeight;
+                    audioMoveUp.play();
                 }
                 break;
             case 'right':
                 if(this.x < cellWidth * 4) { // The player cannot move off screen when he's on the last column
                     this.x += cellWidth;
+                    audioMove.play();
                 }
                 break;
             case 'down':
                 if(this.y < playerInitialY) {// The player cannot move off screen from the bottom when he's on the last row
                     this.y += cellHeight;
+                    audioMoveDown.play();
                 }
                 break;
           }

@@ -13,7 +13,9 @@ You can play [here](https://lucia-gm.github.io/arcade-game/).
 
 ## Credits
 - The background image is from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/).
-- The sounds are from [RCP Tones](https://rcptones.com/dev_tones/#tab-id-1).
+- The sounds are from:
+    * [RCP Tones](https://rcptones.com/dev_tones/#tab-id-1): player moves and reset game.
+    * [Zapsplat](https://www.zapsplat.com/): lose lives, win and lose the game.
 
 ## License
 MIT License
