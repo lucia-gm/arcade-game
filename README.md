@@ -3,6 +3,8 @@ Arcade game based on Frogger Game. This is part of the Udacity Front-End Nanodeg
 
 [View online demo](https://lucia-gm.github.io/arcade-game/)
 
+[![Preview](images/game-preview.gif)](https://lucia-gm.github.io/arcade-game/)
+
 ## How to play
 Reach the water without colliding into any one of the enemies (Bugs).
 
