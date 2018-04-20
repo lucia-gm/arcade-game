@@ -117,7 +117,7 @@ class Player {
 
     // Check if the player wins or loses
     update() {
-        if(this.y < 0) {
+        if(this.y < 0 && game.ui.winModal.classList.contains('hidden')) {
             game.ui.winModal.classList.remove('hidden');
             game.ui.modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
             game.audio.win.play();
@@ -127,7 +127,7 @@ class Player {
             if (player.numberOflives < 2) {
                 game.ui.lives[1].classList.remove('fa-heart');
                 game.ui.lives[1].classList.add('fa-heart-o');
-                if (player.numberOflives < 1) {
+                if (player.numberOflives < 1 && game.ui.winModal.classList.contains('hidden')) {
                     game.ui.lives[0].classList.remove('fa-heart');
                     game.ui.lives[0].classList.add('fa-heart-o');
                     game.ui.winModal.classList.remove('hidden');
