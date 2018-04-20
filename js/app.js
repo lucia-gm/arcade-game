@@ -36,10 +36,12 @@ game.enemyPositionY = [72, 155, 238] // The enemies can only go through rock cel
 
 // Hide the modal and reset the player
 game.reset = function() {
-    game.audio.reset.play();
-    game.ui.winModal.classList.add('hidden');
     player.resetPosition();
     player.numberOflives = 3;
+    allEnemies = [];
+    generateEnemies();
+    game.audio.reset.play();
+    game.ui.winModal.classList.add('hidden');
     game.ui.lives.forEach(function(life) {
         life.classList.remove('fa-heart-o');
         life.classList.add('fa-heart');
@@ -121,6 +123,7 @@ class Player {
             game.ui.winModal.classList.remove('hidden');
             game.ui.modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
             game.audio.win.play();
+            allEnemies = [];
         } else if (player.numberOflives < 3) {
             game.ui.lives[2].classList.remove('fa-heart');
             game.ui.lives[2].classList.add('fa-heart-o');
@@ -133,6 +136,7 @@ class Player {
                     game.ui.winModal.classList.remove('hidden');
                     game.ui.modalText.innerHTML = `Game Over  :(<span class="modal-span">Sorry, you don't have more lives</span>`;
                     game.audio.lose.play();
+                    allEnemies = [];
                 }
             }
         }
@@ -182,13 +186,14 @@ class Player {
 
 const player = new Player(game.ui.playerSprite);
 
-const allEnemies = [];
+let allEnemies = [];
 
 // Generate 6 enemies
-for (let i = 0; i < 6; i++) {
-    allEnemies.push(new Enemy(utils.getRandomInt(-900,-100), utils.getRandomIndex(game.enemyPositionY), utils.getRandomInt(70,300)));
+function generateEnemies() {
+    for (let i = 0; i < 6; i++) {
+        allEnemies.push(new Enemy(utils.getRandomInt(-900,-100), utils.getRandomIndex(game.enemyPositionY), utils.getRandomInt(70,300)));
+    }
 }
-
 
 
 /*
@@ -197,8 +202,9 @@ for (let i = 0; i < 6; i++) {
 
 game.ui.startModal.addEventListener('submit', function(e) {
     game.ui.playerSprite = document.querySelector('input[name=player-name]:checked').value;
-    game.ui.startModal.classList.add('hidden');
     player.sprite = 'images/' + game.ui.playerSprite;
+    game.ui.startModal.classList.add('hidden');
+    generateEnemies();
 
     e.preventDefault();
  }, false);
