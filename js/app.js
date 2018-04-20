@@ -1,63 +1,69 @@
 /*
- * Variables
+ * Game object
  */
+const game = {
+    audio: {},
+    ui: {}
+}
 
-// Resources
-const audioMove = new Audio('sounds/move.wav');
-const audioMoveUp = new Audio('sounds/moveup.wav');
-const audioMoveDown = new Audio('sounds/movedown.wav');
-const audioDie = new Audio('sounds/die.mp3');
-const audioWin = new Audio('sounds/win.mp3');
-const audioLose = new Audio('sounds/lose.mp3');
-const audioReset = new Audio('sounds/reset.wav');
+// Audio resources
+game.audio.move = new Audio('sounds/move.wav');
+game.audio.moveUp = new Audio('sounds/moveup.wav');
+game.audio.moveDown = new Audio('sounds/movedown.wav');
+game.audio.die = new Audio('sounds/die.mp3');
+game.audio.win = new Audio('sounds/win.mp3');
+game.audio.lose = new Audio('sounds/lose.mp3');
+game.audio.reset = new Audio('sounds/reset.wav');
 
 // DOM selectors
-const winModal = document.querySelector('#winModal');
-const modalText = document.querySelector('.modal-message');
-const close = document.querySelector('.close');
-const play = document.querySelectorAll('.play-button');
-const lives = document.querySelectorAll('.fa-heart');
-const restart = document.querySelector('.fa-repeat');
-const startModal = document.querySelector('#startModal');
-let playerSprite = document.querySelector('input[name=player-name]:checked').value;
+game.ui.winModal = document.querySelector('#winModal');
+game.ui.modalText = document.querySelector('.modal-message');
+game.ui.close = document.querySelector('.close');
+game.ui.play = document.querySelectorAll('.play-button');
+game.ui.lives = document.querySelectorAll('.fa-heart');
+game.ui.restart = document.querySelector('.fa-repeat');
+game.ui.startModal = document.querySelector('#startModal');
+game.ui.playerSprite = document.querySelector('input[name=player-name]:checked').value;
 
 // Logical variables
 // Based on the measures of the board's cells per the engine.js files
 // This will be used to update the player's position
-const cellWidth = 101;
-const cellHeight = 83;
-const playerInitialX = 202; // To start on 3rd column, (cellWidth * 2)
-const playerInitialY = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
-let enemyPositionY = [72, 155, 238] // The enemies can only go through rock cells.
+game.cellWidth = 101;
+game.cellHeight = 83;
+game.playerInitialX = 202; // To start on 3rd column, (cellWidth * 2)
+game.playerInitialY = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
+game.enemyPositionY = [72, 155, 238] // The enemies can only go through rock cells.
+
+// Hide the modal and reset the player
+game.reset = function() {
+    game.audio.reset.play();
+    game.ui.winModal.classList.add('hidden');
+    player.resetPosition();
+    player.numberOflives = 3;
+    game.ui.lives.forEach(function(life) {
+        life.classList.remove('fa-heart-o');
+        life.classList.add('fa-heart');
+    });
+}
 
 
 
 /*
- * Functions
+ * Generic functions
  */
+
+const utils = {};
 
 // Return a random integer between the specified values
 // This will be used to get random speed and start X position for the enemies
-function getRandomInt(min, max) {
+utils.getRandomInt = function(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
 // To return a random item from an array
 // This will be used to get a random start Y position for the enemies
-function getRandomIndex(array) {
+utils.getRandomIndex = function(array) {
     return array[Math.floor(Math.random() * array.length)];
-}
-
-// Hide the modal and reset the player
-function resetGame() {
-    audioReset.play();
-    winModal.classList.add('hidden');
-    player.resetPosition();
-    player.numberOflives = 3;
-    lives.forEach(function(life) {
-        life.classList.remove('fa-heart-o');
-        life.classList.add('fa-heart');
-    });
 }
 
 
@@ -71,8 +77,8 @@ class Enemy {
         this.x = x;
         this.y = y;
         this.speed = speed;
-        this.width = cellWidth;
-        this.height = cellHeight;
+        this.width = game.cellWidth;
+        this.height = game.cellHeight;
         this.sprite = 'images/enemy-bug.png';
     }
 
@@ -81,7 +87,7 @@ class Enemy {
     update(dt) {
         // To ensure the game runs at the same speed for all computers
         this.x += this.speed * dt;
-        // If enemeies go off the screen, start again
+        // If enemies go off the screen, start again
         if(this.x > 800) {
             this.x = -100;
         }
@@ -96,37 +102,37 @@ class Enemy {
 
 class Player {
     constructor(sprite) {
-        this.x = playerInitialX;
-        this.y = playerInitialY;
+        this.x = game.playerInitialX;
+        this.y = game.playerInitialY;
         this.numberOflives = 3;
-        this.width = cellWidth;
-        this.height = cellHeight;
+        this.width = game.cellWidth;
+        this.height = game.cellHeight;
         this.sprite = 'images/' + sprite;
     }
 
     resetPosition() {
-        this.x = playerInitialX;
-        this.y = playerInitialY;
+        this.x = game.playerInitialX;
+        this.y = game.playerInitialY;
     }
 
     // Check if the player wins or loses
     update() {
         if(this.y < 0) {
-            winModal.classList.remove('hidden');
-            modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
-            audioWin.play();
+            game.ui.winModal.classList.remove('hidden');
+            game.ui.modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
+            game.audio.win.play();
         } else if (player.numberOflives < 3) {
-            lives[2].classList.remove('fa-heart');
-            lives[2].classList.add('fa-heart-o');
+            game.ui.lives[2].classList.remove('fa-heart');
+            game.ui.lives[2].classList.add('fa-heart-o');
             if (player.numberOflives < 2) {
-                lives[1].classList.remove('fa-heart');
-                lives[1].classList.add('fa-heart-o');
+                game.ui.lives[1].classList.remove('fa-heart');
+                game.ui.lives[1].classList.add('fa-heart-o');
                 if (player.numberOflives < 1) {
-                    lives[0].classList.remove('fa-heart');
-                    lives[0].classList.add('fa-heart-o');
-                    winModal.classList.remove('hidden');
-                    modalText.innerHTML = `Game Over  :(<span class="modal-span">Sorry, you don't have more lives</span>`;
-                    audioLose.play();
+                    game.ui.lives[0].classList.remove('fa-heart');
+                    game.ui.lives[0].classList.add('fa-heart-o');
+                    game.ui.winModal.classList.remove('hidden');
+                    game.ui.modalText.innerHTML = `Game Over  :(<span class="modal-span">Sorry, you don't have more lives</span>`;
+                    game.audio.lose.play();
                 }
             }
         }
@@ -142,26 +148,26 @@ class Player {
         switch (keyCode) {
             case 'left':
                 if(this.x > 0) { // The player cannot move off screen when he's on the 1st column
-                    this.x -= cellWidth;
-                    audioMove.play();
+                    this.x -= game.cellWidth;
+                    game.audio.move.play();
                 }
                 break;
             case 'up':
                 if(this.y > 0) { // The player cannot move off screen when he's on the 1st row
-                    this.y -= cellHeight;
-                    audioMoveUp.play();
+                    this.y -= game.cellHeight;
+                    game.audio.moveUp.play();
                 }
                 break;
             case 'right':
-                if(this.x < cellWidth * 4) { // The player cannot move off screen when he's on the last column
-                    this.x += cellWidth;
-                    audioMove.play();
+                if(this.x < game.cellWidth * 4) { // The player cannot move off screen when he's on the last column
+                    this.x += game.cellWidth;
+                    game.audio.move.play();
                 }
                 break;
             case 'down':
-                if(this.y < playerInitialY) {// The player cannot move off screen from the bottom when he's on the last row
-                    this.y += cellHeight;
-                    audioMoveDown.play();
+                if(this.y < game.playerInitialY) {// The player cannot move off screen from the bottom when he's on the last row
+                    this.y += game.cellHeight;
+                    game.audio.moveDown.play();
                 }
                 break;
           }
@@ -174,13 +180,13 @@ class Player {
  * Instantiate the objects
  */
 
-const player = new Player(playerSprite);
+const player = new Player(game.ui.playerSprite);
 
 const allEnemies = [];
 
 // Generate 6 enemies
 for (let i = 0; i < 6; i++) {
-  allEnemies.push(new Enemy(getRandomInt(-900,-100), getRandomIndex(enemyPositionY), getRandomInt(70,300)));
+    allEnemies.push(new Enemy(utils.getRandomInt(-900,-100), utils.getRandomIndex(game.enemyPositionY), utils.getRandomInt(70,300)));
 }
 
 
@@ -189,12 +195,12 @@ for (let i = 0; i < 6; i++) {
  * Event listeners
  */
 
- startModal.addEventListener('submit', function(e) {
-  playerSprite = document.querySelector('input[name=player-name]:checked').value;
-  startModal.classList.add('hidden');
-  player.sprite = 'images/' + playerSprite;
+game.ui.startModal.addEventListener('submit', function(e) {
+    game.ui.playerSprite = document.querySelector('input[name=player-name]:checked').value;
+    game.ui.startModal.classList.add('hidden');
+    player.sprite = 'images/' + game.ui.playerSprite;
 
-   e.preventDefault();
+    e.preventDefault();
  }, false);
 
 // This listens for key presses and sends the keys to Player.handleInput() method
@@ -210,17 +216,17 @@ document.addEventListener('keyup', function(e) {
 });
 
 // This listens if the user clicks the restart button and resets the game
-restart.addEventListener('click', resetGame);
+game.ui.restart.addEventListener('click', game.reset);
 
 // This listens if the user clicks <span> (x) and close the modal
-close.addEventListener('click', resetGame);
+game.ui.close.addEventListener('click', game.reset);
 
 // This listens if the user clicks anywhere outside of the modal and close it
 window.addEventListener('click', function(event) {
-    if (event.target == winModal) {
-        resetGame();
+    if (event.target == game.ui.winModal) {
+        game.reset();
     }
 });
 
 // This listens if the user clicks on play again and restart the game
-play[1].addEventListener('click', resetGame);
+game.ui.play[1].addEventListener('click', game.reset);

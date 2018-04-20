@@ -103,7 +103,7 @@ var Engine = (function(global) {
         for (const enemy of allEnemies) {
             if (player.x < enemy.x + enemy.width && player.x + player.width > enemy.x &&
               player.y < enemy.y + enemy.height && player.height + player.y > enemy.y) {
-                audioDie.play();
+                game.audio.die.play();
                 player.resetPosition();
                 player.numberOflives -=1;
             }
