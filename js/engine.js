@@ -105,7 +105,7 @@ var Engine = (function(global) {
               player.y < enemy.y + enemy.height && player.height + player.y > enemy.y) {
                 game.audio.die.play();
                 player.resetPosition();
-                player.numberOflives -=1;
+                player.numberOfLives -=1;
             }
         }
     }

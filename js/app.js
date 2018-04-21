@@ -37,7 +37,7 @@ game.enemyPositionY = [72, 155, 238] // The enemies can only go through rock cel
 // Hide the modal and reset the player
 game.reset = function() {
     player.resetPosition();
-    player.numberOflives = 3;
+    player.numberOfLives = 3;
     allEnemies = [];
     generateEnemies();
     game.audio.reset.play();
@@ -106,7 +106,7 @@ class Player {
     constructor(sprite) {
         this.x = game.playerInitialX;
         this.y = game.playerInitialY;
-        this.numberOflives = 3;
+        this.numberOfLives = 3;
         this.width = game.cellWidth;
         this.height = game.cellHeight;
         this.sprite = 'images/' + sprite;
@@ -124,13 +124,13 @@ class Player {
             game.ui.modalText.innerHTML = `Congratulations!<span class="modal-span">You made it!</span>`;
             game.audio.win.play();
             allEnemies = [];
-        } else if (player.numberOflives < 3) {
+        } else if (player.numberOfLives < 3) {
             game.ui.lives[2].classList.remove('fa-heart');
             game.ui.lives[2].classList.add('fa-heart-o');
-            if (player.numberOflives < 2) {
+            if (player.numberOfLives < 2) {
                 game.ui.lives[1].classList.remove('fa-heart');
                 game.ui.lives[1].classList.add('fa-heart-o');
-                if (player.numberOflives < 1 && game.ui.winModal.classList.contains('hidden')) {
+                if (player.numberOfLives < 1 && game.ui.winModal.classList.contains('hidden')) {
                     game.ui.lives[0].classList.remove('fa-heart');
                     game.ui.lives[0].classList.add('fa-heart-o');
                     game.ui.winModal.classList.remove('hidden');
