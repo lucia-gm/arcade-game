@@ -30,9 +30,9 @@ game.ui.playerSprite = document.querySelector('input[name=player-name]:checked')
 // This will be used to update the player's position
 game.cellWidth = 101;
 game.cellHeight = 83;
-game.playerInitialX = 202; // To start on 3rd column, (cellWidth * 2)
-game.playerInitialY = 404; // To start on 4th row, if canvas height=606 and row=6, (606 / 6 * 4)
-game.enemyPositionY = [72, 155, 238] // The enemies can only go through rock cells.
+game.playerInitialX = game.cellWidth * 2; // To start on 3rd column
+game.playerInitialY = (606 / 6) * 4; // To start on 4th row, 606 is canvas height and there are 6 rows
+game.enemyPositionY = [72, 155, 238] // The enemies can only go through rock cells
 
 // Hide the modal and reset the player
 game.reset = function() {
