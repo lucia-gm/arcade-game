@@ -1,9 +1,14 @@
 # Arcade game
-Arcade game based on Frogger Game. This is part of the Udacity Front-End Nanodegree.
+Arcade game based on Frogger Game. 
 
 [View online demo](https://lucia-gm.github.io/arcade-game/)
 
 [![Preview](images/game-preview.gif)](https://lucia-gm.github.io/arcade-game/)
+
+
+## Project Overview
+The project is part of the Udacity Front-End Nanodegree and [here](https://github.com/udacity/frontend-nanodegree-arcade-game) is the starter code. The canvas and the sprites are provided by Udacity. I have implemented the Player and the Enemy classes with their methods, using Object-Oriented JavaScript. 
+
 
 ## How to play
 Reach the water without colliding into any one of the enemies (Bugs).
@@ -14,7 +19,6 @@ You can play [here](https://lucia-gm.github.io/arcade-game/).
 
 
 ## Credits
-- The starter code is from [Udacity](https://github.com/udacity/frontend-nanodegree-arcade-game).
 - The background image is from [Subtle Patterns](https://www.toptal.com/designers/subtlepatterns/).
 - The sounds are from:
     * [RCP Tones](https://rcptones.com/dev_tones/#tab-id-1): player moves and reset game.
